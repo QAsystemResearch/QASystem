@@ -60,7 +60,7 @@ h3 {
 }
 
 .botText {
-    color: white;
+    color: #000000;
     font-family: monospace;
     font-size: 17px;
     text-align: left;
@@ -68,7 +68,7 @@ h3 {
 }
 
 .botText span {
-    background-color: #EF5350;
+    background-color: #b9ddef;
     padding: 10px;
     border-radius: 2px;
 }
