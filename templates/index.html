@@ -87,47 +87,41 @@
                 right:0;
                 width: 300px;
             }
+            .myframe{
+                height: 550px;
+                overflow: auto;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 60px;
+            }
       </style>
+      <<link rel="stylesheet" type="text/css" href="/static/body.css">
   </head>
 
   <body>
+
     <h1>LANS and Routing based Question Answering System</h1>
     <hr>
     <br>
     <br>
     <br>
     <h2>What's your Question?</h2>
-    <div>
-      <div id="chatbox">
-        <p class="botText">
-          <span>Hello!</span></p>
-      </div>
-      <div id="userInput">
-        <input id="textInput" type="text" name="msg" placeholder="Message">
-        <input id="buttonInput" type="submit" value="Send">
-      </div>
-      <script>
-        function getBotResponse() {
-          var rawText = $("#textInput").val();
-          var userHtml = '<p class="userText"><span>' + rawText + '</span></p>';
-          $("#textInput").val("");
-          $("#chatbox").append(userHtml);
-          document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
-          $.get("/get", { msg: rawText }).done(function(data) {
-            var botHtml = '<p class="botText"><span>' + data + '</span></p>';
-            $("#chatbox").append(botHtml);
-            document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
-          });
-        }
-        $("#textInput").keypress(function(e) {
-            if(e.which == 13) {
-                getBotResponse();
-            }
-        });
-        $("#buttonInput").click(function() {
-          getBotResponse();
-        })
-      </script>
+
+    <div class="left-hand ">
+        <iframe name="leftview" src="../component/leftview.html" frameborder=0 width="100%" height="100%" scrolling="no"></iframe>
     </div>
+
+    <div class="middle-hand">
+        <iframe name="middleview" src="../component/middleview.html" frameborder=0 width="100%" height="100%" scrolling="yes">
+
+        </iframe>
+    </div>
+
+    <div class="right-hand">
+        <iframe name="rightview" src="../component/rightview.html" frameborder=0 width="100%" height="100%" scrolling="no"></iframe>
+    </div>
+
+
+
   </body>
 </html>
