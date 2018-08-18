@@ -34,13 +34,13 @@ def get_bot_response():
 
     if (not len(userQuery) > 0):
         # print(len(userQuery))
-        print("Bot> You need to ask something")
+        print("You need to ask something")
     # elif greetPattern.findall(userQuery):
     #     response = "Hello!"
     else:
         pq = PQ(userQuery, True, False, True)
         response = drm.query(pq)
-        res = 'bot says ' + response
+        res = ':' + response
         return res
 
 

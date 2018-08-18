@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-{#    <link rel="stylesheet" type="text/css" href="/static/style.css">#}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       <style>
            body {
@@ -22,6 +21,14 @@
                 margin-top: 0;
                 text-align: center;
                 font-size: 30px;
+            }
+
+           h3 {
+                color: #000000;
+                margin-bottom: 0;
+                margin-top: 0;
+                text-align: center;
+                font-size: 26px;
             }
 
 
@@ -81,21 +88,40 @@
                 border-radius: 2px;
             }
 
-            #tidbit {
-                position:absolute;
-                bottom:0;
-                right:0;
-                width: 300px;
-            }
             .myframe{
-                height: 550px;
+                height: 450px;
+                width: 100%;
                 overflow: auto;
                 margin-left: auto;
                 margin-right: auto;
                 margin-top: 60px;
             }
+          .left{
+              height: 450px;
+              width: 25%;
+              overflow: auto;
+              margin-left: auto;
+              margin-right: auto;
+              margin-top: 60px;
+              position: absolute;
+              left: 10px;
+              top: 160px;
+            }
+          .right{
+              height: 450px;
+              width: 25%;
+              overflow: auto;
+              margin-left: auto;
+              margin-right: auto;
+              margin-top: 60px;
+              position: absolute;
+              right: 10px;
+              top: 160px;
+          }
+
       </style>
-      <<link rel="stylesheet" type="text/css" href="/static/body.css">
+{#      <link rel="stylesheet" type="text/css" href="/static/body.css">#}
+
   </head>
 
   <body>
@@ -107,19 +133,60 @@
     <br>
     <h2>What's your Question?</h2>
 
-    <div class="left-hand ">
-        <iframe name="leftview" src="../component/leftview.html" frameborder=0 width="100%" height="100%" scrolling="no"></iframe>
+    <div class="left">
+        <h3>this is a example left</h3>
     </div>
 
-    <div class="middle-hand">
-        <iframe name="middleview" src="../component/middleview.html" frameborder=0 width="100%" height="100%" scrolling="yes">
-
-        </iframe>
+    <div class="right">
+        <h3>this is a example right</h3>
     </div>
 
-    <div class="right-hand">
-        <iframe name="rightview" src="../component/rightview.html" frameborder=0 width="100%" height="100%" scrolling="no"></iframe>
+
+    <div class="myframe">
+          <div id="chatbox">
+            <p class="botText">
+              <span>Hello!</span></p>
+          </div>
+          <div id="userInput">
+            <input id="textInput" type="text" name="msg" placeholder="Message">
+            <input id="buttonInput" type="submit" value="Send">
+          </div>
+          <script>
+            function getBotResponse() {
+              var rawText = $("#textInput").val();
+              var userHtml = '<p class="userText"><span>' + rawText + '</span></p>';
+              $("#textInput").val("");
+              $("#chatbox").append(userHtml);
+              document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+              $.get("/get", { msg: rawText }).done(function(data) {
+                var botHtml = '<p class="botText"><span>' + data + '</span></p>';
+                $("#chatbox").append(botHtml);
+                document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+              });
+            }
+            $("#textInput").keypress(function(e) {
+                if(e.which == 13) {
+                    getBotResponse();
+                }
+            });
+            $("#buttonInput").click(function() {
+              getBotResponse();
+            })
+          </script>
     </div>
+
+
+{#    <div class="left-hand ">#}
+{#        <iframe name="leftview" src="component/leftview.html" frameborder=0 width="100%" height="100%" scrolling="no"></iframe>#}
+{#    </div>#}
+{##}
+{#    <div class="middle-hand">#}
+{#        <iframe name="middleview" src="component/middleview.html" frameborder=0 width="100%" height="100%" scrolling="yes"></iframe>#}
+{#    </div>#}
+{##}
+{#    <div class="right-hand">#}
+{#        <iframe name="rightview" src="component/rightview.html" frameborder=0 width="100%" height="100%" scrolling="no"></iframe>#}
+{#    </div>#}
 
 
 
